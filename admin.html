@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Editor — Sunetra Nesha Homeopathy</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FCF2ED; --card:#FFFBF8; --ink:#3C2F2A; --ink-soft:#8A776E;
+    --rose:#C4816D; --rose-deep:#A9634F; --line:rgba(60,47,42,0.16); --sage:#6F7659;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;padding-bottom:100px;}
+  h1,h2{font-family:'Fraunces',serif;font-weight:500;margin:0;}
+  .topbar{position:sticky;top:0;z-index:50;background:var(--ink);color:#FBF1EC;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .topbar h1{font-size:19px;color:#FBF1EC;}
+  .topbar .status{font-size:12.5px;color:rgba(251,241,236,0.65);}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px;}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;font-size:14px;line-height:1.7;color:var(--ink-soft);}
+  .intro b{color:var(--ink);}
+  .intro ol{margin:10px 0 0;padding-left:20px;}
+  .loadbar{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap;}
+  .file-btn{display:inline-block;background:#fff;border:1px solid var(--line);padding:9px 16px;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;}
+  .file-btn input{display:none;}
+  section.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin-bottom:22px;}
+  section.panel h2{font-size:20px;margin-bottom:4px;}
+  section.panel .sub{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;}
+  .field input[type=text],.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--ink);}
+  .field textarea{resize:vertical;min-height:60px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .item-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff;position:relative;}
+  .item-card .remove{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--rose-deep);font-size:12px;font-weight:700;cursor:pointer;}
+  .add-btn{background:none;border:1.5px dashed var(--line);color:var(--ink-soft);border-radius:10px;padding:12px;width:100%;font-weight:700;font-size:13px;cursor:pointer;}
+  .add-btn:hover{border-color:var(--rose);color:var(--rose-deep);}
+  .img-row{display:flex;gap:16px;align-items:center;}
+  .img-preview{width:84px;height:84px;border-radius:12px;object-fit:cover;background:#F1E9DE;flex:none;border:1px solid var(--line);}
+  .img-preview.empty{display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-soft);text-align:center;padding:6px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-weight:700;font-size:13.5px;cursor:pointer;border:1px solid transparent;background:var(--rose);color:#fff;}
+  .btn:hover{background:var(--rose-deep);}
+  .btn-outline{background:transparent;border-color:var(--line);color:var(--ink);}
+  .savebar{position:fixed;bottom:0;left:0;right:0;background:rgba(252,242,237,0.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px 24px;display:flex;justify-content:center;gap:14px;z-index:50;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Site Editor</h1>
+  <span class="status" id="statusText">No content loaded yet</span>
+</div>
+
+<div class="wrap">
+  <div class="intro">
+    <b>How this works:</b> this page edits the text and photos on your website without touching any code.
+    <ol>
+      <li>Load your current <code>content.json</code> (loads automatically if this file sits next to it — otherwise upload it below).</li>
+      <li>Edit anything in the form.</li>
+      <li>Click <b>Download updated content.json</b> at the bottom.</li>
+      <li>Replace the old <code>content.json</code> file on your website with the new one you downloaded (same folder as <code>index.html</code>).</li>
+    </ol>
+    <div class="loadbar">
+      <label class="file-btn">Upload content.json manually<input type="file" id="jsonUpload" accept=".json"></label>
+    </div>
+  </div>
+
+  <form id="editorForm"></form>
+</div>
+
+<div class="savebar">
+  <button class="btn btn-outline" id="resetBtn" type="button">Reload original</button>
+  <button class="btn" id="downloadBtn" type="button">Download updated content.json</button>
+</div>
+
+<script>
+let data = null;
+
+async function tryAutoLoad(){
+  try{
+    const res = await fetch('content.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('not found');
+    data = await res.json();
+    document.getElementById('statusText').textContent = 'Loaded content.json automatically';
+    render();
+  }catch(e){
+    document.getElementById('statusText').textContent = 'Could not auto-load — upload content.json above';
+  }
+}
+
+document.getElementById('jsonUpload').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{
+      data = JSON.parse(reader.result);
+      document.getElementById('statusText').textContent = 'Loaded: ' + file.name;
+      render();
+    }catch(err){
+      alert('That file is not valid JSON.');
+    }
+  };
+  reader.readAsText(file);
+});
+
+function fileToDataUrl(file, cb){
+  const reader = new FileReader();
+  reader.onload = () => cb(reader.result);
+  reader.readAsDataURL(file);
+}
+
+function field(label, path, value, multiline){
+  const id = 'f_' + path.replace(/[.\[\]]/g,'_');
+  return `<div class="field"><label for="${id}">${label}</label>` +
+    (multiline
+      ? `<textarea id="${id}" data-path="${path}">${escapeHtml(value||'')}</textarea>`
+      : `<input type="text" id="${id}" data-path="${path}" value="${escapeAttr(value||'')}">`) +
+    `</div>`;
+}
+function escapeHtml(s){return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escapeAttr(s){return (s+'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+
+function imageField(label, path, value){
+  const id = 'img_' + path.replace(/[.\[\]]/g,'_');
+  return `<div class="field"><label>${label}</label><div class="img-row">
+    ${ value ? `<img class="img-preview" src="${value}">` : `<div class="img-preview empty">No photo yet</div>` }
+    <label class="file-btn">Choose photo<input type="file" accept="image/*" data-imgpath="${path}"></label>
+  </div></div>`;
+}
+
+function render(){
+  const form = document.getElementById('editorForm');
+  const d = data;
+  form.innerHTML = `
+
+  <section class="panel">
+    <h2>Site &amp; Contact Info</h2>
+    <div class="sub">Shown in the header, footer, and contact section.</div>
+    <div class="row2">
+      ${field('Practice / Logo Name','site.logoName',d.site.logoName)}
+      ${field('Logo Subtitle','site.logoSub',d.site.logoSub)}
+    </div>
+    <div class="row2">
+      ${field('Phone','site.phone',d.site.phone)}
+      ${field('Email','site.email',d.site.email)}
+    </div>
+    <div class="row2">
+      ${field('Address','site.address',d.site.address)}
+      ${field('Hours','site.hours',d.site.hours)}
+    </div>
+    ${field('Footer copyright line','site.footerNote',d.site.footerNote)}
+  </section>
+
+  <section class="panel">
+    <h2>Hero Section</h2>
+    <div class="sub">The very first thing visitors see.</div>
+    ${field('Small label above headline','hero.eyebrow',d.hero.eyebrow)}
+    <div class="row2">
+      ${field('Headline — line 1','hero.headlineLine1',d.hero.headlineLine1)}
+      ${field('Headline — emphasized part','hero.headlineEmphasis',d.hero.headlineEmphasis)}
+    </div>
+    ${field('Subheading text','hero.lede',d.hero.lede,true)}
+    <div class="row2">
+      ${field('Primary button text','hero.ctaPrimary',d.hero.ctaPrimary)}
+      ${field('Secondary button text','hero.ctaSecondary',d.hero.ctaSecondary)}
+    </div>
+    ${field('Credentials line','hero.credentials',d.hero.credentials)}
+    ${imageField('Hero photo','hero.portraitImage',d.hero.portraitImage)}
+  </section>
+
+  <section class="panel">
+    <h2>Philosophy Section</h2>
+    ${field('Small label','philosophy.eyebrow',d.philosophy.eyebrow)}
+    ${field('Heading','philosophy.heading',d.philosophy.heading,true)}
+    ${field('Paragraph 1','philosophy.paragraph1',d.philosophy.paragraph1,true)}
+    ${field('Paragraph 2','philosophy.paragraph2',d.philosophy.paragraph2,true)}
+    ${field('Pull quote','philosophy.quote',d.philosophy.quote,true)}
+  </section>
+
+  <section class="panel">
+    <h2>About the Practitioner</h2>
+    ${field('Small label','about.eyebrow',d.about.eyebrow)}
+    ${field('Heading','about.heading',d.about.heading,true)}
+    ${field('Full name','about.name',d.about.name)}
+    ${field('Bio paragraph 1','about.paragraph1',d.about.paragraph1,true)}
+    ${field('Bio paragraph 2','about.paragraph2',d.about.paragraph2,true)}
+    <div class="row2">
+      ${field('Qualification','about.qualification',d.about.qualification)}
+      ${field('Registration','about.registration',d.about.registration)}
+    </div>
+    ${imageField('About photo','about.portraitImage',d.about.portraitImage)}
+    <label style="display:block;margin:18px 0 10px;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);">"Why work with me" points</label>
+    <div id="whyItemsList"></div>
+    <button type="button" class="add-btn" data-add="about.whyItems">+ Add a point</button>
+  </section>
+
+  <section class="panel">
+    <h2>Areas of Practice</h2>
+    <div class="sub">The concern cards shown in the practice grid.</div>
+    <div id="practiceList"></div>
+    <button type="button" class="add-btn" data-add="practiceAreas">+ Add an area of practice</button>
+  </section>
+
+  <section class="panel">
+    <h2>How Consultations Work</h2>
+    <div id="consultStepsList"></div>
+    <button type="button" class="add-btn" data-add="consultSteps">+ Add a step</button>
+    <div class="row2" style="margin-top:20px;">
+      ${field('First consultation length','consultPanel.firstConsult',d.consultPanel.firstConsult)}
+      ${field('Follow-up length','consultPanel.followUp',d.consultPanel.followUp)}
+    </div>
+    <div class="row2">
+      ${field('Availability','consultPanel.availability',d.consultPanel.availability)}
+      ${field('Format','consultPanel.format',d.consultPanel.format)}
+    </div>
+    <label style="display:block;margin:14px 0 10px;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);">"What to expect" list</label>
+    <div id="expectList"></div>
+    <button type="button" class="add-btn" data-add="consultPanel.expectList">+ Add a line</button>
+  </section>
+
+  <section class="panel">
+    <h2>Contact Section</h2>
+    ${field('Small label','contact.eyebrow',d.contact.eyebrow)}
+    ${field('Heading','contact.heading',d.contact.heading,true)}
+    ${field('Subtext','contact.lede',d.contact.lede,true)}
+  </section>
+  `;
+
+  renderList('whyItemsList','about.whyItems', v => `${field('Point','$PATH',v,true)}`);
+  renderList('practiceList','practiceAreas', v => `<div class="row2">${field('Title','$PATH.title',v.title)}${field('Description','$PATH.description',v.description)}</div>`);
+  renderList('consultStepsList','consultSteps', v => `<div class="row2">${field('Step title','$PATH.title',v.title)}${field('Step description','$PATH.description',v.description)}</div>`);
+  renderList('expectList','consultPanel.expectList', v => `${field('Line','$PATH',v)}`);
+
+  bindInputs();
+}
+
+function renderList(containerId, path, template){
+  const container = document.getElementById(containerId);
+  const arr = getPath(path);
+  container.innerHTML = arr.map((item,i)=>{
+    const itemPath = `${path}[${i}]`;
+    return `<div class="item-card">
+      <button type="button" class="remove" data-remove="${path}" data-index="${i}">Remove</button>
+      ${template(item).replaceAll('$PATH', itemPath)}
+    </div>`;
+  }).join('');
+}
+
+function getPath(path){
+  const parts = path.replace(/\[(\d+)\]/g,'.$1').split('.');
+  let cur = data;
+  for(const p of parts){ cur = cur[p]; }
+  return cur;
+}
+function setPath(path, value){
+  const parts = path.replace(/\[(\d+)\]/g,'.$1').split('.');
+  let cur = data;
+  for(let i=0;i<parts.length-1;i++){ cur = cur[parts[i]]; }
+  cur[parts[parts.length-1]] = value;
+}
+
+function bindInputs(){
+  document.querySelectorAll('[data-path]').forEach(el=>{
+    el.addEventListener('input', ()=>{ setPath(el.dataset.path, el.value); });
+  });
+  document.querySelectorAll('[data-imgpath]').forEach(el=>{
+    el.addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      fileToDataUrl(file, (dataUrl)=>{
+        setPath(el.dataset.imgpath, dataUrl);
+        render();
+      });
+    });
+  });
+  document.querySelectorAll('[data-remove]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const path = el.dataset.remove;
+      const idx = parseInt(el.dataset.index,10);
+      const arr = getPath(path);
+      arr.splice(idx,1);
+      render();
+    });
+  });
+  document.querySelectorAll('[data-add]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const path = el.dataset.add;
+      const arr = getPath(path);
+      if(path === 'practiceAreas') arr.push({title:'New concern', description:'Description here.'});
+      else if(path === 'consultSteps') arr.push({title:'New step', description:'Description here.'});
+      else arr.push('New item');
+      render();
+    });
+  });
+}
+
+document.getElementById('downloadBtn').addEventListener('click', ()=>{
+  if(!data){ alert('Load content.json first.'); return; }
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'content.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('resetBtn').addEventListener('click', tryAutoLoad);
+
+tryAutoLoad();
+</script>
+
+</body>
+</html>

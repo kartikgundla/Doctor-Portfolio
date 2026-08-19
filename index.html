@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umika Homeopathy — Individualized Homeopathic Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FCF2ED;
+    --bg-alt: #F6E3D8;
+    --bg-alt-2: #F1E9DE;
+    --card: #FFFBF8;
+    --ink: #3C2F2A;
+    --ink-soft: #8A776E;
+    --ink-faint: #B6A79D;
+    --rose: #C4816D;
+    --rose-deep: #A9634F;
+    --rose-pale: #EFC9BB;
+    --sage: #8B9170;
+    --sage-deep: #6F7659;
+    --line: rgba(60,47,42,0.14);
+    --shadow: 0 20px 60px -25px rgba(60,47,42,0.35);
+    --radius: 26px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope', sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--rose-pale);color:var(--ink);}
+  h1,h2,h3,.serif{font-family:'Fraunces', serif;font-weight:500;letter-spacing:-0.01em;margin:0;}
+  .italic{font-style:italic;font-weight:400;}
+  .eyebrow{font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--rose-deep);display:inline-block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(252,242,237,0.86);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s ease, background .3s ease;}
+  header.scrolled{border-color:var(--line);}
+  .nav{max-width:1160px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:22px;display:flex;flex-direction:column;line-height:1.05;}
+  .logo small{font-family:'Manrope',sans-serif;font-style:normal;font-weight:700;font-size:9.5px;letter-spacing:0.22em;color:var(--ink-soft);margin-top:3px;}
+  .nav-links{display:flex;align-items:center;gap:36px;font-size:14.5px;font-weight:600;}
+  .nav-links a{color:var(--ink-soft);position:relative;padding:4px 0;transition:color .2s ease;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{background:var(--rose);color:#fff !important;padding:11px 22px;border-radius:100px;font-size:13.5px;font-weight:700;letter-spacing:0.01em;box-shadow:0 10px 24px -10px rgba(169,99,79,0.55);transition:background .2s ease, transform .2s ease;}
+  .nav-cta:hover{background:var(--rose-deep);transform:translateY(-1px);}
+  .burger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+  .burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;}
+  .hero{padding:168px 0 110px;overflow:hidden;}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;}
+  .ripple-field{position:absolute;top:-140px; right:-220px;width:760px;height:760px;pointer-events:none;opacity:0.55;z-index:0;}
+  .hero-copy{position:relative;z-index:1;}
+  .hero-copy .eyebrow{margin-bottom:22px;}
+  .hero h1{font-size:clamp(40px,5.4vw,64px);line-height:1.06;color:var(--ink);}
+  .hero h1 em{font-style:italic;color:var(--rose-deep);}
+  .hero p.lede{margin:26px 0 0;max-width:460px;font-size:17.5px;color:var(--ink-soft);}
+  .hero-actions{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:100px;font-weight:700;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:all .22s ease;}
+  .btn-primary{background:var(--rose);color:#fff;box-shadow:0 14px 30px -12px rgba(169,99,79,0.55);}
+  .btn-primary:hover{background:var(--rose-deep);transform:translateY(-2px);}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--rose-deep);color:var(--rose-deep);}
+  .credential-strip{margin-top:46px;font-size:13px;color:var(--ink-soft);font-weight:600;}
+  .portrait-frame{position:relative;aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,#F6DFD3,#EAC7BA 55%,#DDB4A5);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);overflow:hidden;}
+  .portrait-frame img{width:100%;height:100%;object-fit:cover;}
+  .portrait-note{position:relative;z-index:1;text-align:center;color:rgba(60,47,42,0.55);font-size:13px;font-weight:600;letter-spacing:0.04em;}
+  .portrait-note svg{margin:0 auto 12px;display:block;opacity:0.7;}
+  .philosophy{background:var(--card);padding:120px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .philosophy .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .philosophy h2{font-size:clamp(30px,3.4vw,40px);line-height:1.18;margin:20px 0 26px;}
+  .philosophy p{color:var(--ink-soft);font-size:15.8px;margin:0 0 18px;max-width:480px;}
+  .pull-quote{margin:32px 0 0;font-family:'Fraunces',serif;font-style:italic;font-size:22px;line-height:1.5;color:var(--rose-deep);border-left:2px solid var(--rose-pale);padding-left:22px;}
+  .drop-diagram{display:flex;flex-direction:column;gap:0;}
+  .drop-step{display:flex;align-items:center;gap:22px;padding:20px 0;border-bottom:1px solid var(--line);}
+  .drop-step:last-child{border-bottom:none;}
+  .drop-ring{flex:none;display:flex;align-items:center;justify-content:center;}
+  .drop-text .label{font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-deep);}
+  .drop-text .val{font-family:'Fraunces',serif;font-size:19px;margin-top:4px;}
+  .about{padding:120px 0;}
+  .about .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:start;}
+  .about-portrait{aspect-ratio:3/4;border-radius:var(--radius);background:linear-gradient(165deg,#EDE3D3,#DCE0C6 60%,#C9D2B0);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;position:sticky;top:120px;overflow:hidden;}
+  .about-portrait img{width:100%;height:100%;object-fit:cover;}
+  .about h2{font-size:clamp(28px,3.2vw,38px);line-height:1.2;margin-bottom:20px;}
+  .about p{color:var(--ink-soft);font-size:15.8px;margin:0 0 18px;max-width:560px;}
+  .about-name{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+  .quali-grid{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;}
+  .quali-card{background:var(--bg-alt-2);border-radius:16px;padding:20px 22px;}
+  .quali-card .k{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:8px;}
+  .quali-card .v{font-size:14.5px;font-weight:600;line-height:1.45;}
+  .why-list{margin-top:38px;display:flex;flex-direction:column;gap:0;}
+  .why-item{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--line);}
+  .why-item:last-child{border-bottom:1px solid var(--line);}
+  .why-item .mark{flex:none;width:8px;height:8px;border-radius:50%;background:var(--rose-pale);margin-top:7px;}
+  .why-item p{margin:0;}
+  .practice{background:var(--bg-alt);padding:120px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head h2{font-size:clamp(30px,3.6vw,42px);line-height:1.15;margin:18px 0 0;}
+  .section-head p{color:var(--ink-soft);font-size:16px;margin:18px 0 0;}
+  .concern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .concern-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .concern-card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -22px rgba(60,47,42,0.28);border-color:var(--rose-pale);}
+  .concern-card h3{font-size:18px;font-weight:500;margin-bottom:8px;}
+  .concern-card p{margin:0;font-size:13.8px;color:var(--ink-soft);}
+  .consult{padding:120px 0;}
+  .consult .wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;}
+  .consult-steps{display:flex;flex-direction:column;gap:26px;}
+  .consult-step{display:flex;gap:20px;}
+  .consult-step .num{font-family:'Fraunces',serif;font-style:italic;font-size:26px;color:var(--rose-pale);flex:none;width:38px;}
+  .consult-step h4{font-family:'Fraunces',serif;font-weight:500;font-size:17.5px;margin:0 0 6px;}
+  .consult-step p{margin:0;color:var(--ink-soft);font-size:14.8px;}
+  .consult-panel{background:var(--bg-alt-2);border-radius:var(--radius);padding:40px;}
+  .consult-panel .row{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);}
+  .consult-panel .row:first-of-type{padding-top:0;}
+  .consult-panel .row:last-of-type{border-bottom:none;}
+  .consult-panel .row .k{font-size:14px;color:var(--ink-soft);font-weight:600;}
+  .consult-panel .row .v{font-family:'Fraunces',serif;font-size:16.5px;}
+  .expect-list{margin-top:28px;padding-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  .expect-list li{list-style:none;font-size:13.6px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;}
+  .expect-list li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--sage);margin-top:7px;flex:none;}
+  .contact{background:var(--ink);color:#F3E8E1;padding:120px 0 70px;}
+  .contact .eyebrow{color:var(--rose-pale);}
+  .contact .eyebrow::before{background:var(--rose-pale);}
+  .contact .wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:start;}
+  .contact h2{font-size:clamp(30px,3.6vw,44px);line-height:1.14;color:#FBF1EC;margin:18px 0 22px;}
+  .contact p.lede{color:rgba(251,241,236,0.68);font-size:16px;max-width:420px;margin:0 0 34px;}
+  .contact-detail{display:flex;gap:16px;padding:18px 0;border-top:1px solid rgba(251,241,236,0.14);}
+  .contact-detail:last-child{border-bottom:1px solid rgba(251,241,236,0.14);}
+  .contact-detail .k{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(251,241,236,0.5);width:90px;flex:none;padding-top:2px;}
+  .contact-detail .v{font-size:15px;font-weight:600;color:#FBF1EC;}
+  .contact-detail .v span{display:block;font-weight:400;color:rgba(251,241,236,0.65);font-size:13.5px;margin-top:2px;}
+  .form-card{background:#FBF1EC;border-radius:var(--radius);padding:40px;color:var(--ink);}
+  .form-card h3{font-size:20px;margin-bottom:6px;}
+  .form-card .sub{color:var(--ink-soft);font-size:13.8px;margin-bottom:26px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+  .field input,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:14.5px;color:var(--ink);resize:none;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px rgba(196,129,109,0.18);}
+  .form-submit{width:100%;justify-content:center;margin-top:6px;}
+  footer{background:var(--ink);color:rgba(251,241,236,0.55);padding:38px 0;border-top:1px solid rgba(251,241,236,0.12);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:16px;}
+  footer .foot-links{display:flex;gap:24px;}
+  footer .foot-links a:hover{color:#FBF1EC;}
+  @media (max-width:920px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .hero .wrap,.philosophy .wrap,.about .wrap,.consult .wrap,.contact .wrap{grid-template-columns:1fr;}
+    .about-portrait{position:static;aspect-ratio:16/10;}
+    .concern-grid{grid-template-columns:repeat(2,1fr);}
+    .ripple-field{display:none;}
+    .hero{padding-top:130px;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 22px;}
+    .concern-grid{grid-template-columns:1fr;}
+    .quali-grid{grid-template-columns:1fr;}
+    .expect-list{grid-template-columns:1fr;}
+    .form-card{padding:28px;}
+    .consult-panel{padding:28px;}
+  }
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="nav">
+    <a href="#home" class="logo" id="navLogo"><span id="logoName">Umika Homeopathy</span><small id="logoSub">WELLNESS CONSULTATIONS</small></a>
+    <div class="nav-links">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#about">About</a>
+      <a href="#practice">Practice Areas</a>
+      <a href="#consult">Consultations</a>
+      <a href="#contact" class="nav-cta" id="navCta">Book a Consultation</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <svg class="ripple-field" viewBox="0 0 760 760" fill="none">
+    <circle cx="380" cy="380" r="80" stroke="#C4816D" stroke-width="1.2" opacity="0.5"/>
+    <circle cx="380" cy="380" r="150" stroke="#C4816D" stroke-width="1" opacity="0.38"/>
+    <circle cx="380" cy="380" r="230" stroke="#C4816D" stroke-width="1" opacity="0.28"/>
+    <circle cx="380" cy="380" r="320" stroke="#C4816D" stroke-width="1" opacity="0.18"/>
+    <circle cx="380" cy="380" r="20" fill="#C4816D" opacity="0.5"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow" id="heroEyebrow"></span>
+      <h1 id="heroHeadline"></h1>
+      <p class="lede" id="heroLede"></p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary" id="heroCtaPrimary"></a>
+        <a href="#consult" class="btn btn-ghost" id="heroCtaSecondary"></a>
+      </div>
+      <div class="credential-strip" id="heroCredentials"></div>
+    </div>
+    <div class="portrait-frame" id="heroPortrait">
+      <div class="portrait-note">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M4 16.5V6.75A1.75 1.75 0 0 1 5.75 5h12.5A1.75 1.75 0 0 1 20 6.75v10.5M4 16.5 8.5 12l3 3 4-4.5L20 16.5M4 16.5v.75A1.75 1.75 0 0 0 5.75 19h12.5A1.75 1.75 0 0 0 20 17.25v-.75" stroke="#3C2F2A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Portrait photo<br>coming soon
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="philosophy">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" id="philEyebrow"></span>
+      <h2 id="philHeading"></h2>
+      <p id="philP1"></p>
+      <p id="philP2"></p>
+      <p class="pull-quote" id="philQuote"></p>
+    </div>
+    <div class="drop-diagram">
+      <div class="drop-step">
+        <div class="drop-ring"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="6" fill="#C4816D"/></svg></div>
+        <div class="drop-text"><div class="label">Step One</div><div class="val">The original substance</div></div>
+      </div>
+      <div class="drop-step">
+        <div class="drop-ring"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" stroke="#C4816D" stroke-width="1.4" fill="none"/><circle cx="32" cy="32" r="4" fill="#C4816D"/></svg></div>
+        <div class="drop-text"><div class="label">Step Two</div><div class="val">Diluted, then succussed</div></div>
+      </div>
+      <div class="drop-step">
+        <div class="drop-ring"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" stroke="#C4816D" stroke-width="1.1" fill="none" opacity="0.7"/><circle cx="32" cy="32" r="16" stroke="#C4816D" stroke-width="1.2" fill="none"/><circle cx="32" cy="32" r="3" fill="#C4816D"/></svg></div>
+        <div class="drop-text"><div class="label">Step Three</div><div class="val">Repeated, layer by layer</div></div>
+      </div>
+      <div class="drop-step">
+        <div class="drop-ring"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="#8B9170" stroke-width="1.3" fill="none"/><circle cx="32" cy="32" r="20" stroke="#8B9170" stroke-width="1.1" fill="none" opacity="0.7"/><circle cx="32" cy="32" r="10" stroke="#8B9170" stroke-width="1.1" fill="none" opacity="0.5"/></svg></div>
+        <div class="drop-text"><div class="label">Potentization</div><div class="val">The more diluted, the stronger it acts</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-portrait" id="aboutPortrait">
+      <div class="portrait-note">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 16.5V6.75A1.75 1.75 0 0 1 5.75 5h12.5A1.75 1.75 0 0 1 20 6.75v10.5M4 16.5 8.5 12l3 3 4-4.5L20 16.5M4 16.5v.75A1.75 1.75 0 0 0 5.75 19h12.5A1.75 1.75 0 0 0 20 17.25v-.75" stroke="#3C2F2A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Portrait photo<br>coming soon
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow" id="aboutEyebrow"></span>
+      <h2 style="margin-top:18px;" id="aboutHeading"></h2>
+      <div class="about-name" style="margin-top:28px;" id="aboutName"></div>
+      <p id="aboutP1"></p>
+      <p id="aboutP2"></p>
+      <div class="quali-grid">
+        <div class="quali-card"><div class="k">Qualification</div><div class="v" id="aboutQual"></div></div>
+        <div class="quali-card"><div class="k">Registration</div><div class="v" id="aboutReg"></div></div>
+      </div>
+      <div class="why-list" id="whyList"></div>
+    </div>
+  </div>
+</section>
+
+<section class="practice" id="practice">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Areas of Practice</span>
+      <h2>Concerns I work with</h2>
+      <p>Every remedy is chosen for the individual — these are some of the areas patients most often come to me for.</p>
+    </div>
+    <div class="concern-grid" id="concernGrid"></div>
+  </div>
+</section>
+
+<section class="consult" id="consult">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">How It Works</span>
+      <h2 style="font-size:clamp(28px,3.2vw,38px);margin:18px 0 34px;line-height:1.2;">Online consultations, wherever you are</h2>
+      <div class="consult-steps" id="consultSteps"></div>
+    </div>
+    <div class="consult-panel">
+      <div class="row"><span class="k">First Consultation</span><span class="v" id="panelFirst"></span></div>
+      <div class="row"><span class="k">Follow-up Sessions</span><span class="v" id="panelFollow"></span></div>
+      <div class="row"><span class="k">Availability</span><span class="v" id="panelAvail"></span></div>
+      <div class="row"><span class="k">Format</span><span class="v" id="panelFormat"></span></div>
+      <ul class="expect-list" id="expectList"></ul>
+      <a href="#contact" class="btn btn-primary" style="margin-top:30px;width:100%;justify-content:center;">Book Your Consultation</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" id="contactEyebrow"></span>
+      <h2 id="contactHeading"></h2>
+      <p class="lede" id="contactLede"></p>
+      <div class="contact-detail"><span class="k">Phone</span><span class="v" id="contactPhone"></span></div>
+      <div class="contact-detail"><span class="k">Email</span><span class="v" id="contactEmail"></span></div>
+      <div class="contact-detail"><span class="k">Address</span><span class="v" id="contactAddress"></span></div>
+      <div class="contact-detail"><span class="k">Hours</span><span class="v" id="contactHours"></span></div>
+    </div>
+    <div class="form-card">
+      <h3>Drop us a line</h3>
+      <div class="sub">I'll get back to you to confirm your consultation.</div>
+      <form onsubmit="return false;">
+        <div class="field"><label for="name">Your Name *</label><input id="name" type="text" placeholder="Enter your name" required></div>
+        <div class="field"><label for="email">Your Email *</label><input id="email" type="email" placeholder="Enter your email" required></div>
+        <div class="field"><label for="message">Your Message</label><textarea id="message" rows="4" placeholder="Leave us a message"></textarea></div>
+        <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="font-size:17px;" id="footLogo"></div>
+    <div class="foot-links">
+      <a href="#home">Home</a><a href="#about">About</a><a href="#practice">Practice</a><a href="#contact">Contact</a>
+    </div>
+    <div id="footNote"></div>
+  </div>
+</footer>
+
+<script>
+async function loadContent(){
+  const res = await fetch('content.json', {cache:'no-store'});
+  const data = await res.json();
+
+  // site
+  document.getElementById('logoName').textContent = data.site.logoName;
+  document.getElementById('logoSub').textContent = data.site.logoSub;
+  document.getElementById('footLogo').textContent = data.site.logoName;
+  document.getElementById('footNote').textContent = data.site.footerNote;
+
+  // hero
+  document.getElementById('heroEyebrow').textContent = data.hero.eyebrow;
+  document.getElementById('heroHeadline').innerHTML = data.hero.headlineLine1 + '<br><em>' + data.hero.headlineEmphasis + '</em>';
+  document.getElementById('heroLede').textContent = data.hero.lede;
+  document.getElementById('heroCtaPrimary').textContent = data.hero.ctaPrimary;
+  document.getElementById('heroCtaSecondary').textContent = data.hero.ctaSecondary;
+  document.getElementById('heroCredentials').textContent = data.hero.credentials;
+  if (data.hero.portraitImage) {
+    document.getElementById('heroPortrait').innerHTML = '<img src="'+data.hero.portraitImage+'" alt="'+data.about.name+'">';
+  }
+
+  // philosophy
+  document.getElementById('philEyebrow').textContent = data.philosophy.eyebrow;
+  document.getElementById('philHeading').textContent = data.philosophy.heading;
+  document.getElementById('philP1').textContent = data.philosophy.paragraph1;
+  document.getElementById('philP2').innerHTML = data.philosophy.paragraph2.replace('Allium cepa','<em class="italic">Allium cepa</em>');
+  document.getElementById('philQuote').textContent = '"' + data.philosophy.quote + '"';
+
+  // about
+  document.getElementById('aboutEyebrow').textContent = data.about.eyebrow;
+  document.getElementById('aboutHeading').textContent = data.about.heading;
+  document.getElementById('aboutName').textContent = data.about.name;
+  document.getElementById('aboutP1').textContent = data.about.paragraph1;
+  document.getElementById('aboutP2').textContent = data.about.paragraph2;
+  document.getElementById('aboutQual').textContent = data.about.qualification;
+  document.getElementById('aboutReg').textContent = data.about.registration;
+  if (data.about.portraitImage) {
+    document.getElementById('aboutPortrait').innerHTML = '<img src="'+data.about.portraitImage+'" alt="'+data.about.name+'">';
+  }
+  const whyList = document.getElementById('whyList');
+  data.about.whyItems.forEach(item=>{
+    const div = document.createElement('div');
+    div.className = 'why-item';
+    div.innerHTML = '<span class="mark"></span><p>'+item+'</p>';
+    whyList.appendChild(div);
+  });
+
+  // practice areas
+  const grid = document.getElementById('concernGrid');
+  data.practiceAreas.forEach(area=>{
+    const card = document.createElement('div');
+    card.className = 'concern-card';
+    card.innerHTML = '<h3>'+area.title+'</h3><p>'+area.description+'</p>';
+    grid.appendChild(card);
+  });
+
+  // consult steps
+  const steps = document.getElementById('consultSteps');
+  data.consultSteps.forEach((step,i)=>{
+    const div = document.createElement('div');
+    div.className = 'consult-step';
+    div.innerHTML = '<span class="num">0'+(i+1)+'</span><div><h4>'+step.title+'</h4><p>'+step.description+'</p></div>';
+    steps.appendChild(div);
+  });
+
+  // consult panel
+  document.getElementById('panelFirst').textContent = data.consultPanel.firstConsult;
+  document.getElementById('panelFollow').textContent = data.consultPanel.followUp;
+  document.getElementById('panelAvail').textContent = data.consultPanel.availability;
+  document.getElementById('panelFormat').textContent = data.consultPanel.format;
+  const expect = document.getElementById('expectList');
+  data.consultPanel.expectList.forEach(item=>{
+    const li = document.createElement('li');
+    li.textContent = item;
+    expect.appendChild(li);
+  });
+
+  // contact
+  document.getElementById('contactEyebrow').textContent = data.contact.eyebrow;
+  document.getElementById('contactHeading').textContent = data.contact.heading;
+  document.getElementById('contactLede').textContent = data.contact.lede;
+  document.getElementById('contactPhone').textContent = data.site.phone;
+  document.getElementById('contactEmail').textContent = data.site.email;
+  document.getElementById('contactAddress').textContent = data.site.address;
+  document.getElementById('contactHours').innerHTML = 'Mon–Fri <span>'+data.site.hours.replace('Mon–Fri, ','')+'</span>';
+}
+loadContent().catch(err=>{
+  console.error('Could not load content.json', err);
+  document.body.insertAdjacentHTML('afterbegin','<div style="background:#A9634F;color:#fff;padding:14px 22px;text-align:center;font-family:sans-serif;font-size:14px;">Could not load content.json — if you\'re viewing this file locally (file://), run it through a local server instead. See admin.html instructions.</div>');
+});
+
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 12));
+const burger = document.getElementById('burger');
+const navLinks = document.querySelector('.nav-links');
+burger.addEventListener('click', () => {
+  const open = navLinks.style.display === 'flex';
+  navLinks.style.display = open ? 'none' : 'flex';
+  navLinks.style.cssText += open ? '' : 'position:fixed;top:70px;left:0;right:0;background:#FCF2ED;flex-direction:column;padding:24px 32px;border-bottom:1px solid rgba(60,47,42,0.14);gap:20px;';
+});
+</script>
+</body>
+</html>
