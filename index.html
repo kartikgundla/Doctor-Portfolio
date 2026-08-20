@@ -182,7 +182,6 @@
   .footer-col .contact-line:hover{color:#FBF1EC;}
   footer .bottom-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;flex-wrap:wrap;gap:12px;padding:22px 0;}
 
-  /* floating whatsapp button */
   .whatsapp-float{position:fixed;bottom:26px;right:26px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(37,211,102,0.6);z-index:90;transition:transform .2s ease;}
   .whatsapp-float:hover{transform:scale(1.08);}
   @media (max-width:920px){
@@ -441,7 +440,6 @@ async function loadContent(){
   const res = await fetch('content.json', {cache:'no-store'});
   const data = await res.json();
 
-  // site
   document.getElementById('logoName').textContent = data.site.logoName;
   document.getElementById('logoSub').textContent = data.site.logoSub;
 
@@ -449,7 +447,6 @@ async function loadContent(){
   const waLink = (msg) => `https://wa.me/${waNumber}${msg ? '?text=' + encodeURIComponent(msg) : ''}`;
   document.getElementById('floatWhatsapp').href = waLink(data.booking ? data.booking.whatsappMessage : '');
 
-  // hero
   document.getElementById('heroEyebrow').textContent = data.hero.eyebrow;
   document.getElementById('heroHeadline').innerHTML = data.hero.headlineLine1 + '<br><em>' + data.hero.headlineEmphasis + '</em>';
   document.getElementById('heroLede').textContent = data.hero.lede;
@@ -460,14 +457,12 @@ async function loadContent(){
     document.getElementById('heroPortrait').innerHTML = '<img src="'+data.hero.portraitImage+'" alt="'+data.about.name+'">';
   }
 
-  // philosophy
   document.getElementById('philEyebrow').textContent = data.philosophy.eyebrow;
   document.getElementById('philHeading').textContent = data.philosophy.heading;
   document.getElementById('philP1').textContent = data.philosophy.paragraph1;
   document.getElementById('philP2').innerHTML = data.philosophy.paragraph2.replace('Allium cepa','<em class="italic">Allium cepa</em>');
   document.getElementById('philQuote').textContent = '"' + data.philosophy.quote + '"';
 
-  // about
   document.getElementById('aboutEyebrow').textContent = data.about.eyebrow;
   document.getElementById('aboutHeading').textContent = data.about.heading;
   document.getElementById('aboutName').textContent = data.about.name;
@@ -486,7 +481,6 @@ async function loadContent(){
     whyList.appendChild(div);
   });
 
-  // practice areas
   const grid = document.getElementById('concernGrid');
   data.practiceAreas.forEach(area=>{
     const card = document.createElement('div');
@@ -495,7 +489,6 @@ async function loadContent(){
     grid.appendChild(card);
   });
 
-  // consult steps
   const steps = document.getElementById('consultSteps');
   data.consultSteps.forEach((step,i)=>{
     const div = document.createElement('div');
@@ -504,7 +497,6 @@ async function loadContent(){
     steps.appendChild(div);
   });
 
-  // consult panel
   document.getElementById('panelFirst').textContent = data.consultPanel.firstConsult;
   document.getElementById('panelFollow').textContent = data.consultPanel.followUp;
   document.getElementById('panelAvail').textContent = data.consultPanel.availability;
@@ -516,7 +508,6 @@ async function loadContent(){
     expect.appendChild(li);
   });
 
-  // contact
   document.getElementById('contactEyebrow').textContent = data.contact.eyebrow;
   document.getElementById('contactHeading').textContent = data.contact.heading;
   document.getElementById('contactLede').textContent = data.contact.lede;
@@ -526,7 +517,6 @@ async function loadContent(){
   document.getElementById('contactHours').innerHTML = 'Mon–Fri <span>'+data.site.hours.replace('Mon–Fri, ','')+'</span>';
   document.getElementById('contactWhatsapp').href = waLink(data.booking ? data.booking.whatsappMessage : '');
 
-  // booking
   if (data.booking){
     const b = data.booking;
     document.getElementById('bookEyebrow').textContent = b.eyebrow;
@@ -545,12 +535,11 @@ async function loadContent(){
     document.getElementById('bookFormNote').textContent = b.formNote;
   }
 
-  // faq
   if (data.faq){
     document.getElementById('faqEyebrow').textContent = data.faq.eyebrow;
     document.getElementById('faqHeading').innerHTML = data.faq.headlineLine1 + ' <em class="italic" style="color:var(--rose-deep);font-style:italic;">' + data.faq.headlineEmphasis + '</em>';
     const faqList = document.getElementById('faqList');
-    data.faq.items.forEach((item,i)=>{
+    data.faq.items.forEach((item)=>{
       const div = document.createElement('div');
       div.className = 'faq-item';
       div.innerHTML = `<button class="faq-q" type="button"><span>${item.question}</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="faq-a"><p>${item.answer}</p></div>`;
@@ -573,7 +562,6 @@ async function loadContent(){
     });
   }
 
-  // footer
   if (data.footer){
     document.getElementById('footAvatar').textContent = (data.about.name || 'U').replace('Dr. ','').replace(/\[.*\]/,'').trim().charAt(0) || 'U';
     document.getElementById('footName').textContent = data.about.name;
@@ -598,7 +586,7 @@ async function loadContent(){
 }
 loadContent().catch(err=>{
   console.error('Could not load content.json', err);
-  document.body.insertAdjacentHTML('afterbegin','<div style="background:#A9634F;color:#fff;padding:14px 22px;text-align:center;font-family:sans-serif;font-size:14px;">Could not load content.json — if you\'re viewing this file locally (file://), run it through a local server instead. See admin.html instructions.</div>');
+  document.body.insertAdjacentHTML('afterbegin','<div style="background:#A9634F;color:#fff;padding:14px 22px;text-align:center;font-family:sans-serif;font-size:14px;">Could not load content.json — if you\'re viewing this file locally (file://), run it through a local server instead.</div>');
 });
 
 const header = document.getElementById('siteHeader');
@@ -611,11 +599,13 @@ burger.addEventListener('click', () => {
   navLinks.style.cssText += open ? '' : 'position:fixed;top:70px;left:0;right:0;background:#FCF2ED;flex-direction:column;padding:24px 32px;border-bottom:1px solid rgba(60,47,42,0.14);gap:20px;';
 });
 
-// ⚠️ EmailJS config — fill these in from your EmailJS dashboard (emailjs.com)
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_CONFIGURED = !EMAILJS_PUBLIC_KEY.startsWith("PASTE_");
+// EmailJS config — PUBLIC key only. This is designed to be visible client-side
+// (EmailJS scopes it to your account + template, it is not a secret like an API token).
+// Fill these in directly from your EmailJS dashboard (emailjs.com) — no env vars, no build step needed.
+const EMAILJS_PUBLIC_KEY = 'SemI6ZeID_4NbipbZ';
+const EMAILJS_SERVICE_ID = 'service_16dzknn';
+const EMAILJS_TEMPLATE_ID = 'template_b4z8phv';
+const EMAILJS_CONFIGURED = !EMAILJS_PUBLIC_KEY.startsWith('PASTE_');
 if (EMAILJS_CONFIGURED && window.emailjs) {
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 }
