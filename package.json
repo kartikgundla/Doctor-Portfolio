@@ -1,9 +1,23 @@
 {
-  "name": "umika-homeopathy-portfolio",
+  "name": "doctor-portfolio",
   "version": "1.0.0",
-  "private": true,
-  "description": "Static portfolio site for Umika Homeopathy with a no-code content editor backed by Vercel serverless functions.",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartikgundla/doctor-portfolio.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kartikgundla/doctor-portfolio/issues"
+  },
+  "homepage": "https://github.com/kartikgundla/doctor-portfolio#readme",
+  "devDependencies": {
+    "vite": "^8.2.2"
   }
 }
