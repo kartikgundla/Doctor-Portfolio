@@ -1,120 +1,122 @@
-{
-  "site": {
-    "logoName": "Umika Homeopathy",
-    "logoSub": "WELLNESS CONSULTATIONS",
-    "phone": "+44 (0) 7423 429392",
-    "email": "soonitra@gmail.com",
-    "address": "Goodwin Road, Coventry — CV6",
-    "hours": "Mon–Fri, 9:30am – 3:00pm",
-    "footerNote": "© 2026 Umika Homeopathy. All rights reserved."
-  },
-  "hero": {
-    "eyebrow": "Individualized Homeopathic Care",
-    "headlineLine1": "Your health",
-    "headlineEmphasis": "is my passion.",
-    "lede": "A root-cause, whole-person approach to healing — blending classical homeopathic principles with compassionate, individualized care, delivered wherever you are.",
-    "ctaPrimary": "Book a Consultation",
-    "ctaSecondary": "How online consultations work",
-    "credentials": "MD, BHMS  •  Registered Homeopathic Practitioner  •  Online Worldwide",
-    "portraitImage": "HERO_IMAGE_PLACEHOLDER"
-  },
-  "philosophy": {
-    "eyebrow": "Like Cures Like",
-    "heading": "A substance that causes symptoms, in minute doses, can help resolve those same symptoms.",
-    "paragraph1": "Homeopathy treats each person as a unique individual, aiming to stimulate the body's own natural healing ability. The right remedy is chosen by matching the whole pattern of a person's symptoms — physical, emotional, and lifestyle — not just a diagnosis.",
-    "paragraph2": "Chopping an onion causes watery eyes and a runny nose. In homeopathy, a preparation made from onion (Allium cepa) may be chosen for someone whose symptoms closely resemble that same pattern. It's medicine built on the principle of similarity.",
-    "quote": "In every drop, a dose of nature's wisdom. In every remedy, the promise of gentle healing."
-  },
-  "about": {
-    "eyebrow": "About the Practitioner",
-    "heading": "Taking an individualized, root-cause approach to health.",
-    "name": "Dr. Sunetra Nesha",
-    "paragraph1": "A dedicated homeopathic consultant offering personalized, patient-centered care anchored in classical homeopathic principles. To make expert holistic healthcare accessible everywhere, the practice offers convenient online consultations via video, audio, or WhatsApp for patients worldwide.",
-    "paragraph2": "I believe one size does not fit all. My approach targets the root cause of your concerns and supports you in building maintainable habits for long-term wellbeing — not just treating an isolated symptom.",
-    "qualification": "MD, BHMS (Bachelor of Homeopathic Medicine & Surgery)",
-    "registration": "Registered Homeopathic Practitioner",
-    "whyItems": [
-      "Holistic assessment of physical, emotional, and lifestyle factors — never just the isolated illness.",
-      "Compassionate, non-judgmental approach focused on what works best for you.",
-      "Confidential, individualized treatment plans with dedicated follow-up care."
+  {
+    "site": {
+      "logoName": "Umika Homeopathy",
+      "logoSub": "WELLNESS CONSULTATIONS",
+      "phone": "+44 (0) 7423 429392",
+      "whatsappNumber": "447423429392",
+      "email": "soonitra@gmail.com",
+      "address": "Goodwin Road, Coventry — CV6",
+      "hours": "Mon–Fri, 9:30am – 3:00pm",
+      "footerNote": "© 2026 Umika Homeopathy. All rights reserved."
+    },
+    "hero": {
+      "eyebrow": "Individualized Homeopathic Care",
+      "headlineLine1": "Your health",
+      "headlineEmphasis": "is my passion.",
+      "lede": "A root-cause, whole-person approach to healing — blending classical homeopathic principles with compassionate, individualized care, delivered wherever you are.",
+      "ctaPrimary": "Book a Consultation",
+      "ctaSecondary": "How online consultations work",
+      "credentials": "MD, BHMS  •  Registered Homeopathic Practitioner  •  Online Worldwide",
+      "portraitImage": null
+    },
+    "philosophy": {
+      "eyebrow": "Like Cures Like",
+      "heading": "A substance that causes symptoms, in minute doses, can help resolve those same symptoms.",
+      "paragraph1": "Homeopathy treats each person as a unique individual, aiming to stimulate the body's own natural healing ability. The right remedy is chosen by matching the whole pattern of a person's symptoms — physical, emotional, and lifestyle — not just a diagnosis.",
+      "paragraph2": "Chopping an onion causes watery eyes and a runny nose. In homeopathy, a preparation made from onion (Allium cepa) may be chosen for someone whose symptoms closely resemble that same pattern. It's medicine built on the principle of similarity.",
+      "quote": "In every drop, a dose of nature's wisdom. In every remedy, the promise of gentle healing."
+    },
+    "about": {
+      "eyebrow": "About the Practitioner",
+      "heading": "Taking an individualized, root-cause approach to health.",
+      "name": "Dr. Soonetra Nesha",
+      "paragraph1": "A dedicated homeopathic consultant offering personalized, patient-centered care anchored in classical homeopathic principles. To make expert holistic healthcare accessible everywhere, the practice offers convenient online consultations via video, audio, or WhatsApp for patients worldwide.",
+      "paragraph2": "I believe one size does not fit all. My approach targets the root cause of your concerns and supports you in building maintainable habits for long-term wellbeing — not just treating an isolated symptom.",
+      "qualification": "MD, BHMS (Bachelor of Homeopathic Medicine & Surgery)",
+      "registration": "Registered Homeopathic Practitioner",
+      "whyItems": [
+        "Holistic assessment of physical, emotional, and lifestyle factors — never just the isolated illness.",
+        "Compassionate, non-judgmental approach focused on what works best for you.",
+        "Confidential, individualized treatment plans with dedicated follow-up care."
+      ],
+      "portraitImage": null
+    },
+    "practiceAreas": [
+      { "title": "Allergies & Respiratory", "description": "Seasonal allergies, sinus trouble, and recurring respiratory concerns." },
+      { "title": "Mental & Emotional Health", "description": "Stress, anxiety, low mood, and emotional wellbeing." },
+      { "title": "Skin", "description": "Eczema, acne, and other chronic or recurring skin conditions." },
+      { "title": "Gut Issues", "description": "Digestive discomfort and long-standing gut imbalances." },
+      { "title": "Women's Health", "description": "Menstrual conditions, menopause, fertility, and pregnancy-related concerns." },
+      { "title": "Joint Conditions", "description": "Ongoing joint pain and stiffness." },
+      { "title": "Hormonal Problems", "description": "Hormone-related imbalances affecting day-to-day wellbeing." },
+      { "title": "Hair Problems", "description": "Hair thinning and scalp-related concerns." },
+      { "title": "Children's Health", "description": "Gentle, individualized care for children's common health concerns." },
+      { "title": "Minor Ailments", "description": "Bruises, burns, insect bites, and everyday complaints." }
     ],
-    "portraitImage": null
-  },
-  "practiceAreas": [
-    {
-      "title": "Allergies & Respiratory",
-      "description": "Seasonal allergies, sinus trouble, and recurring respiratory concerns."
+    "consultSteps": [
+      { "title": "Book your slot", "description": "Choose a time that works for you — appointments run Monday to Friday, 9:30am–3:00pm." },
+      { "title": "Connect by Zoom or WhatsApp video", "description": "Your first consultation runs 60–90 minutes, giving us time to discuss your concerns in full." },
+      { "title": "Receive an individualized plan", "description": "A treatment approach chosen for your specific pattern of symptoms — not a one-size-fits-all remedy." },
+      { "title": "Dedicated follow-up care", "description": "Follow-up sessions run 30–45 minutes to track progress and adjust your plan as needed." }
+    ],
+    "consultPanel": {
+      "firstConsult": "60–90 minutes",
+      "followUp": "30–45 minutes",
+      "availability": "Mon–Fri, 9:30am–3:00pm",
+      "format": "Zoom · WhatsApp Video",
+      "expectList": [
+        "Secure, confidential online consultations",
+        "Individualized treatment plans",
+        "Experienced homeopathic practitioner",
+        "Convenient appointments from anywhere"
+      ]
     },
-    {
-      "title": "Mental & Emotional Health",
-      "description": "Stress, anxiety, low mood, and emotional wellbeing."
+    "contact": {
+      "eyebrow": "Get in Touch",
+      "heading": "Boost health with functional, individualized care.",
+      "lede": "Have questions or need more information? Reach out to start your path to a healthy, balanced life."
     },
-    {
-      "title": "Skin",
-      "description": "Eczema, acne, and other chronic or recurring skin conditions."
+    "booking": {
+      "eyebrow": "Get Started",
+      "headlineLine1": "Book a",
+      "headlineEmphasis": "Consultation",
+      "lede": "Fill out the form and I'll reach out to schedule your consultation. Prefer WhatsApp? Message directly.",
+      "whatsappButtonText": "Message on WhatsApp",
+      "whatsappMessage": "Hi, I'd like to book a homeopathy consultation.",
+      "expectTitle": "What to Expect",
+      "expectItems": [
+        "Response within 24 hours",
+        "60–90 min initial consultation",
+        "Follow-up support included"
+      ],
+      "formSubmitText": "Request Consultation",
+      "formNote": "Your information is kept strictly confidential."
     },
-    {
-      "title": "Gut Issues",
-      "description": "Digestive discomfort and long-standing gut imbalances."
+    "faq": {
+      "eyebrow": "FAQ",
+      "headlineLine1": "Common",
+      "headlineEmphasis": "Questions",
+      "items": [
+        { "question": "What is homeopathy and how does it work?", "answer": "Homeopathy is a system of medicine based on the principle of \"like cures like\" — a substance that can cause symptoms in a healthy person may, in a highly diluted form, help the body address similar symptoms. Remedies are chosen to match your overall pattern of symptoms, not just a diagnosis." },
+        { "question": "How do online consultations work?", "answer": "Consultations take place over Zoom or WhatsApp video. The first session runs 60–90 minutes so we can go through your concerns in full; follow-ups run 30–45 minutes to track progress and adjust your plan." },
+        { "question": "Is homeopathy safe for children and pregnant women?", "answer": "Homeopathic remedies are generally considered gentle, but every case is individual — especially during pregnancy or for young children. This is discussed in detail during your consultation, and I'll always advise seeing a doctor for anything requiring urgent or emergency care." },
+        { "question": "How long does treatment take to show results?", "answer": "This varies by person and condition. Some notice changes within a few weeks; longer-standing concerns can take longer. Follow-up sessions are built in specifically to track progress and adjust the plan as needed." },
+        { "question": "Can I take homeopathic medicine alongside conventional treatment?", "answer": "In many cases, yes — but please tell me about any medications or treatments you're currently using so I can take that into account. Never stop a prescribed conventional treatment without speaking to the prescribing doctor first." },
+        { "question": "What are the consultation fees?", "answer": "Fees depend on the type and length of consultation. Message on WhatsApp or fill out the booking form and I'll confirm pricing before we schedule anything." }
+      ]
     },
-    {
-      "title": "Women's Health",
-      "description": "Menstrual conditions, menopause, fertility, and pregnancy-related concerns."
-    },
-    {
-      "title": "Joint Conditions",
-      "description": "Ongoing joint pain and stiffness."
-    },
-    {
-      "title": "Hormonal Problems",
-      "description": "Hormone-related imbalances affecting day-to-day wellbeing."
-    },
-    {
-      "title": "Hair Problems",
-      "description": "Hair thinning and scalp-related concerns."
-    },
-    {
-      "title": "Children's Health",
-      "description": "Gentle, individualized care for children's common health concerns."
-    },
-    {
-      "title": "Minor Ailments",
-      "description": "Bruises, burns, insect bites, and everyday complaints."
+    "footer": {
+      "tagline": "Umika Cure & Wellness — personalized online homeopathic consultations for patients worldwide.",
+      "quickLinks": [
+        { "label": "About", "href": "#about" },
+        { "label": "Practice Areas", "href": "#practice" },
+        { "label": "How It Works", "href": "#consult" },
+        { "label": "FAQ", "href": "#faq" },
+        { "label": "Book a Consultation", "href": "#booking" }
+      ],
+      "legalLinks": [
+        { "label": "Privacy Policy", "href": "#" },
+        { "label": "Medical Disclaimer", "href": "#" }
+      ]
     }
-  ],
-  "consultSteps": [
-    {
-      "title": "Book your slot",
-      "description": "Choose a time that works for you — appointments run Monday to Friday, 9:30am–3:00pm."
-    },
-    {
-      "title": "Connect by Zoom or WhatsApp video",
-      "description": "Your first consultation runs 60–90 minutes, giving us time to discuss your concerns in full."
-    },
-    {
-      "title": "Receive an individualized plan",
-      "description": "A treatment approach chosen for your specific pattern of symptoms — not a one-size-fits-all remedy."
-    },
-    {
-      "title": "Dedicated follow-up care",
-      "description": "Follow-up sessions run 30–45 minutes to track progress and adjust your plan as needed."
-    }
-  ],
-  "consultPanel": {
-    "firstConsult": "60–90 minutes",
-    "followUp": "30–45 minutes",
-    "availability": "Mon–Fri, 9:30am–3:00pm",
-    "format": "Zoom · WhatsApp Video",
-    "expectList": [
-      "Secure, confidential online consultations",
-      "Individualized treatment plans",
-      "Experienced homeopathic practitioner",
-      "Convenient appointments from anywhere"
-    ]
-  },
-  "contact": {
-    "eyebrow": "contact me",
-    "heading": "Boost health with functional, individualized care.",
-    "lede": "Have questions or need more information? Reach out to start your path to a healthy, balanced life."
   }
-}

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Editor — Sunetra Nesha Homeopathy</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Editor — Sunetra Nesha Homeopathy</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+    <style>
   :root{
     --bg:#FCF2ED; --card:#FFFBF8; --ink:#3C2F2A; --ink-soft:#8A776E;
     --rose:#C4816D; --rose-deep:#A9634F; --line:rgba(60,47,42,0.16); --sage:#6F7659;
@@ -41,40 +43,143 @@
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-weight:700;font-size:13.5px;cursor:pointer;border:1px solid transparent;background:var(--rose);color:#fff;}
   .btn:hover{background:var(--rose-deep);}
   .btn-outline{background:transparent;border-color:var(--line);color:var(--ink);}
-  .savebar{position:fixed;bottom:0;left:0;right:0;background:rgba(252,242,237,0.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px 24px;display:flex;justify-content:center;gap:14px;z-index:50;}
+  .savebar{position:fixed;bottom:0;left:0;right:0;background:rgba(252,242,237,0.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px 24px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px;z-index:50;}
+
+  /* login gate */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .login-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;max-width:400px;width:100%;}
+  .login-card h1{font-size:22px;margin-bottom:6px;}
+  .login-card .sub{font-size:13.5px;color:var(--ink-soft);margin-bottom:24px;line-height:1.6;}
+  .captcha-row{display:flex;align-items:center;gap:14px;background:#F1E9DE;border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+  .captcha-q{font-family:'Fraunces',serif;font-size:18px;font-weight:500;white-space:nowrap;}
+  .captcha-row input{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;min-width:0;}
+  .login-err{color:#A9634F;font-size:13px;margin:-6px 0 14px;display:none;}
+  .login-err.show{display:block;}
+  #adminApp{display:none;}
+  .logout-link{background:none;border:none;color:var(--ink-soft);font-size:12.5px;font-weight:700;cursor:pointer;text-decoration:underline;}
 </style>
-</head>
-<body>
+  </head>
+  <body>
 
-<div class="topbar">
-  <h1>Site Editor</h1>
-  <span class="status" id="statusText">No content loaded yet</span>
-</div>
-
-<div class="wrap">
-  <div class="intro">
-    <b>How this works:</b> this page edits the text and photos on your website without touching any code.
-    <ol>
-      <li>Load your current <code>content.json</code> (loads automatically if this file sits next to it — otherwise upload it below).</li>
-      <li>Edit anything in the form.</li>
-      <li>Click <b>Download updated content.json</b> at the bottom.</li>
-      <li>Replace the old <code>content.json</code> file on your website with the new one you downloaded (same folder as <code>index.html</code>).</li>
-    </ol>
-    <div class="loadbar">
-      <label class="file-btn">Upload content.json manually<input type="file" id="jsonUpload" accept=".json"></label>
+    <div class="login-wrap" id="loginScreen">
+      <div class="login-card">
+        <h1>Site Editor Login</h1>
+        <div class="sub">Enter your admin email and password to edit the
+          site.</div>
+        <div class="field"><label>Email</label><input type="email"
+            id="loginEmail" autocomplete="username"></div>
+        <div class="field"><label>Password</label><input type="password"
+            id="loginPw" autocomplete="current-password"></div>
+        <div class="captcha-row">
+          <span class="captcha-q" id="captchaQ"></span>
+          <input type="text" id="captchaA" placeholder="Answer"
+            inputmode="numeric">
+        </div>
+        <div class="login-err" id="loginErr">That email, password, or captcha
+          answer isn't right.</div>
+        <button class="btn" id="loginBtn" type="button"
+          style="width:100%;justify-content:center;">Log In</button>
+      </div>
     </div>
-  </div>
 
-  <form id="editorForm"></form>
-</div>
+    <div id="adminApp">
+      <div class="topbar">
+        <h1>Site Editor</h1>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="status" id="statusText">No content loaded yet</span>
+          <button class="logout-link" id="logoutBtn" type="button">Log
+            out</button>
+        </div>
+      </div>
 
-<div class="savebar">
-  <button class="btn btn-outline" id="resetBtn" type="button">Reload original</button>
-  <button class="btn" id="downloadBtn" type="button">Download updated content.json</button>
-</div>
+      <div class="wrap">
+        <div class="intro">
+          <b>How this works:</b> this page edits the text and photos on your
+          website without touching any code.
+          <ol>
+            <li>Load your current <code>content.json</code> (loads automatically
+              if this file sits next to it — otherwise upload it below).</li>
+            <li>Edit anything in the form.</li>
+            <li>Click <b>Download updated content.json</b> at the bottom.</li>
+            <li>Replace the old <code>content.json</code> file on your website
+              with the new one you downloaded (same folder as
+              <code>index.html</code>).</li>
+          </ol>
+          <div class="loadbar">
+            <label class="file-btn">Upload content.json manually<input
+                type="file" id="jsonUpload" accept=".json"></label>
+          </div>
+        </div>
 
-<script>
+        <form id="editorForm"></form>
+      </div>
+
+      <div class="savebar">
+        <span id="saveStatus"
+          style="font-size:12.5px;color:var(--ink-soft);margin-right:auto;align-self:center;"></span>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reload
+          original</button>
+        <button class="btn btn-outline" id="downloadBtn" type="button">Download
+          Backup</button>
+        <button class="btn" id="saveBtn" type="button">Save Changes</button>
+      </div>
+    </div>
+
+    <script>
+const ADMIN_CREDENTIAL_HASH = import.meta.env.VITE_ADMIN_CREDENTIAL_HASH;
+const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER;
+const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO;
+const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH;
+const GITHUB_PATH = import.meta.env.VITE_GITHUB_PATH;
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+
 let data = null;
+let captchaAnswer = 0;
+
+function newCaptcha(){
+  const a = Math.floor(Math.random()*8)+2;
+  const b = Math.floor(Math.random()*8)+2;
+  captchaAnswer = a + b;
+  document.getElementById('captchaQ').textContent = `${a} + ${b} =`;
+  document.getElementById('captchaA').value = '';
+}
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function showApp(){
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display = 'block';
+  tryAutoLoad();
+}
+async function attemptLogin(){
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pw = document.getElementById('loginPw').value;
+  const captchaGuess = parseInt(document.getElementById('captchaA').value, 10);
+  const err = document.getElementById('loginErr');
+  if(captchaGuess !== captchaAnswer){ err.classList.add('show'); newCaptcha(); return; }
+  const hash = await sha256(email + '::' + pw);
+  if(ADMIN_CREDENTIAL_HASH === 'PASTE_YOUR_GENERATED_CODE_HERE'){
+    alert('No login has been set up yet. Open generate-credentials.html first to create one.');
+    return;
+  }
+  if(hash === ADMIN_CREDENTIAL_HASH){
+    err.classList.remove('show');
+    sessionStorage.setItem('umika_admin_auth', '1');
+    showApp();
+  }else{
+    err.classList.add('show');
+    newCaptcha();
+  }
+}
+document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+document.getElementById('loginPw').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  sessionStorage.removeItem('umika_admin_auth');
+  location.reload();
+});
+newCaptcha();
+if(sessionStorage.getItem('umika_admin_auth') === '1'){ showApp(); }
 
 async function tryAutoLoad(){
   try{
@@ -307,8 +412,51 @@ document.getElementById('downloadBtn').addEventListener('click', ()=>{
 
 document.getElementById('resetBtn').addEventListener('click', tryAutoLoad);
 
-tryAutoLoad();
+async function saveToGithub(){
+  if(!data){ alert('Load content.json first.'); return; }
+  const statusEl = document.getElementById('saveStatus');
+  const btn = document.getElementById('saveBtn');
+  if(GITHUB_TOKEN === 'PASTE_YOUR_GITHUB_TOKEN_HERE'){
+    statusEl.textContent = 'GitHub isn\'t connected yet — ask your developer to finish setup.';
+    statusEl.style.color = '#A9634F';
+    return;
+  }
+  btn.disabled = true;
+  statusEl.style.color = 'var(--ink-soft)';
+  statusEl.textContent = 'Saving…';
+  try{
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+    const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, {
+      cache: 'no-store',
+      headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' }
+    });
+    if(!getRes.ok) throw new Error('Could not reach the repo (check owner/repo/branch/token).');
+    const fileInfo = await getRes.json();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'Update site content via admin editor',
+        content,
+        sha: fileInfo.sha,
+        branch: GITHUB_BRANCH
+      })
+    });
+    if(!putRes.ok){
+      const errBody = await putRes.json().catch(()=>({}));
+      throw new Error(errBody.message || 'GitHub rejected the save.');
+    }
+    statusEl.style.color = 'var(--sage)';
+    statusEl.textContent = 'Saved! Your site will update shortly.';
+  }catch(err){
+    statusEl.style.color = '#A9634F';
+    statusEl.textContent = 'Save failed: ' + err.message;
+  }
+  btn.disabled = false;
+}
+document.getElementById('saveBtn').addEventListener('click', saveToGithub);
 </script>
 
-</body>
+  </body>
 </html>
