@@ -2,10 +2,8 @@
   "name": "doctor-portfolio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "vite build"
+    "dev": "vercel dev"
   },
   "repository": {
     "type": "git",
@@ -16,8 +14,5 @@
   "bugs": {
     "url": "https://github.com/kartikgundla/doctor-portfolio/issues"
   },
-  "homepage": "https://github.com/kartikgundla/doctor-portfolio#readme",
-  "devDependencies": {
-    "vite": "^8.2.2"
-  }
+  "homepage": "https://github.com/kartikgundla/doctor-portfolio#readme"
 }
