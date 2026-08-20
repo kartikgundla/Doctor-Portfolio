@@ -16,7 +16,7 @@
     "ctaPrimary": "Book a Consultation",
     "ctaSecondary": "How online consultations work",
     "credentials": "MD, BHMS  •  Registered Homeopathic Practitioner  •  Online Worldwide",
-    "portraitImage": null
+    "portraitImage": "HERO_IMAGE_PLACEHOLDER"
   },
   "philosophy": {
     "eyebrow": "Like Cures Like",
@@ -28,7 +28,7 @@
   "about": {
     "eyebrow": "About the Practitioner",
     "heading": "Taking an individualized, root-cause approach to health.",
-    "name": "Dr. [Name — to confirm]",
+    "name": "Dr. Sunetra Nesha",
     "paragraph1": "A dedicated homeopathic consultant offering personalized, patient-centered care anchored in classical homeopathic principles. To make expert holistic healthcare accessible everywhere, the practice offers convenient online consultations via video, audio, or WhatsApp for patients worldwide.",
     "paragraph2": "I believe one size does not fit all. My approach targets the root cause of your concerns and supports you in building maintainable habits for long-term wellbeing — not just treating an isolated symptom.",
     "qualification": "MD, BHMS (Bachelor of Homeopathic Medicine & Surgery)",
@@ -41,22 +41,64 @@
     "portraitImage": null
   },
   "practiceAreas": [
-    { "title": "Allergies & Respiratory", "description": "Seasonal allergies, sinus trouble, and recurring respiratory concerns." },
-    { "title": "Mental & Emotional Health", "description": "Stress, anxiety, low mood, and emotional wellbeing." },
-    { "title": "Skin", "description": "Eczema, acne, and other chronic or recurring skin conditions." },
-    { "title": "Gut Issues", "description": "Digestive discomfort and long-standing gut imbalances." },
-    { "title": "Women's Health", "description": "Menstrual conditions, menopause, fertility, and pregnancy-related concerns." },
-    { "title": "Joint Conditions", "description": "Ongoing joint pain and stiffness." },
-    { "title": "Hormonal Problems", "description": "Hormone-related imbalances affecting day-to-day wellbeing." },
-    { "title": "Hair Problems", "description": "Hair thinning and scalp-related concerns." },
-    { "title": "Children's Health", "description": "Gentle, individualized care for children's common health concerns." },
-    { "title": "Minor Ailments", "description": "Bruises, burns, insect bites, and everyday complaints." }
+    {
+      "title": "Allergies & Respiratory",
+      "description": "Seasonal allergies, sinus trouble, and recurring respiratory concerns."
+    },
+    {
+      "title": "Mental & Emotional Health",
+      "description": "Stress, anxiety, low mood, and emotional wellbeing."
+    },
+    {
+      "title": "Skin",
+      "description": "Eczema, acne, and other chronic or recurring skin conditions."
+    },
+    {
+      "title": "Gut Issues",
+      "description": "Digestive discomfort and long-standing gut imbalances."
+    },
+    {
+      "title": "Women's Health",
+      "description": "Menstrual conditions, menopause, fertility, and pregnancy-related concerns."
+    },
+    {
+      "title": "Joint Conditions",
+      "description": "Ongoing joint pain and stiffness."
+    },
+    {
+      "title": "Hormonal Problems",
+      "description": "Hormone-related imbalances affecting day-to-day wellbeing."
+    },
+    {
+      "title": "Hair Problems",
+      "description": "Hair thinning and scalp-related concerns."
+    },
+    {
+      "title": "Children's Health",
+      "description": "Gentle, individualized care for children's common health concerns."
+    },
+    {
+      "title": "Minor Ailments",
+      "description": "Bruises, burns, insect bites, and everyday complaints."
+    }
   ],
   "consultSteps": [
-    { "title": "Book your slot", "description": "Choose a time that works for you — appointments run Monday to Friday, 9:30am–3:00pm." },
-    { "title": "Connect by Zoom or WhatsApp video", "description": "Your first consultation runs 60–90 minutes, giving us time to discuss your concerns in full." },
-    { "title": "Receive an individualized plan", "description": "A treatment approach chosen for your specific pattern of symptoms — not a one-size-fits-all remedy." },
-    { "title": "Dedicated follow-up care", "description": "Follow-up sessions run 30–45 minutes to track progress and adjust your plan as needed." }
+    {
+      "title": "Book your slot",
+      "description": "Choose a time that works for you — appointments run Monday to Friday, 9:30am–3:00pm."
+    },
+    {
+      "title": "Connect by Zoom or WhatsApp video",
+      "description": "Your first consultation runs 60–90 minutes, giving us time to discuss your concerns in full."
+    },
+    {
+      "title": "Receive an individualized plan",
+      "description": "A treatment approach chosen for your specific pattern of symptoms — not a one-size-fits-all remedy."
+    },
+    {
+      "title": "Dedicated follow-up care",
+      "description": "Follow-up sessions run 30–45 minutes to track progress and adjust your plan as needed."
+    }
   ],
   "consultPanel": {
     "firstConsult": "60–90 minutes",
