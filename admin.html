@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Editor — Sunetra Nesha Homeopathy</title>
+    <title>Site Editor — Umika Homeopathy</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet">
@@ -30,7 +30,7 @@
   section.panel .sub{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
   .field{margin-bottom:16px;}
   .field label{display:block;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;}
-  .field input[type=text],.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--ink);}
+  .field input[type=text],.field input[type=email],.field input[type=password],.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--ink);}
   .field textarea{resize:vertical;min-height:60px;}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .item-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff;position:relative;}
@@ -42,8 +42,10 @@
   .img-preview.empty{display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-soft);text-align:center;padding:6px;}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-weight:700;font-size:13.5px;cursor:pointer;border:1px solid transparent;background:var(--rose);color:#fff;}
   .btn:hover{background:var(--rose-deep);}
+  .btn:disabled{opacity:0.6;cursor:not-allowed;}
   .btn-outline{background:transparent;border-color:var(--line);color:var(--ink);}
   .savebar{position:fixed;bottom:0;left:0;right:0;background:rgba(252,242,237,0.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:16px 24px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px;z-index:50;}
+  .subhead{display:block;margin:18px 0 10px;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);}
 
   /* login gate */
   .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -64,21 +66,15 @@
     <div class="login-wrap" id="loginScreen">
       <div class="login-card">
         <h1>Site Editor Login</h1>
-        <div class="sub">Enter your admin email and password to edit the
-          site.</div>
-        <div class="field"><label>Email</label><input type="email"
-            id="loginEmail" autocomplete="username"></div>
-        <div class="field"><label>Password</label><input type="password"
-            id="loginPw" autocomplete="current-password"></div>
+        <div class="sub">Enter your admin email and password to edit the site.</div>
+        <div class="field"><label>Email</label><input type="email" id="loginEmail" autocomplete="username"></div>
+        <div class="field"><label>Password</label><input type="password" id="loginPw" autocomplete="current-password"></div>
         <div class="captcha-row">
           <span class="captcha-q" id="captchaQ"></span>
-          <input type="text" id="captchaA" placeholder="Answer"
-            inputmode="numeric">
+          <input type="text" id="captchaA" placeholder="Answer" inputmode="numeric">
         </div>
-        <div class="login-err" id="loginErr">That email, password, or captcha
-          answer isn't right.</div>
-        <button class="btn" id="loginBtn" type="button"
-          style="width:100%;justify-content:center;">Log In</button>
+        <div class="login-err" id="loginErr"></div>
+        <button class="btn" id="loginBtn" type="button" style="width:100%;justify-content:center;">Log In</button>
       </div>
     </div>
 
@@ -87,27 +83,20 @@
         <h1>Site Editor</h1>
         <div style="display:flex;align-items:center;gap:16px;">
           <span class="status" id="statusText">No content loaded yet</span>
-          <button class="logout-link" id="logoutBtn" type="button">Log
-            out</button>
+          <button class="logout-link" id="logoutBtn" type="button">Log out</button>
         </div>
       </div>
 
       <div class="wrap">
         <div class="intro">
-          <b>How this works:</b> this page edits the text and photos on your
-          website without touching any code.
+          <b>How this works:</b> this page edits the text and photos on your website without touching any code.
           <ol>
-            <li>Load your current <code>content.json</code> (loads automatically
-              if this file sits next to it — otherwise upload it below).</li>
+            <li>Load your current <code>content.json</code> (loads automatically if this file sits next to it — otherwise upload it below).</li>
             <li>Edit anything in the form.</li>
-            <li>Click <b>Download updated content.json</b> at the bottom.</li>
-            <li>Replace the old <code>content.json</code> file on your website
-              with the new one you downloaded (same folder as
-              <code>index.html</code>).</li>
+            <li>Click <b>Save Changes</b> — this saves directly to the website's GitHub repo.</li>
           </ol>
           <div class="loadbar">
-            <label class="file-btn">Upload content.json manually<input
-                type="file" id="jsonUpload" accept=".json"></label>
+            <label class="file-btn">Upload content.json manually<input type="file" id="jsonUpload" accept=".json"></label>
           </div>
         </div>
 
@@ -115,26 +104,17 @@
       </div>
 
       <div class="savebar">
-        <span id="saveStatus"
-          style="font-size:12.5px;color:var(--ink-soft);margin-right:auto;align-self:center;"></span>
-        <button class="btn btn-outline" id="resetBtn" type="button">Reload
-          original</button>
-        <button class="btn btn-outline" id="downloadBtn" type="button">Download
-          Backup</button>
+        <span id="saveStatus" style="font-size:12.5px;color:var(--ink-soft);margin-right:auto;align-self:center;"></span>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reload original</button>
+        <button class="btn btn-outline" id="downloadBtn" type="button">Download Backup</button>
         <button class="btn" id="saveBtn" type="button">Save Changes</button>
       </div>
     </div>
 
     <script>
-const ADMIN_CREDENTIAL_HASH = import.meta.env.VITE_ADMIN_CREDENTIAL_HASH;
-const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER;
-const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO;
-const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH;
-const GITHUB_PATH = import.meta.env.VITE_GITHUB_PATH;
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-
 let data = null;
 let captchaAnswer = 0;
+let sessionToken = sessionStorage.getItem('umika_admin_token') || null;
 
 function newCaptcha(){
   const a = Math.floor(Math.random()*8)+2;
@@ -143,43 +123,75 @@ function newCaptcha(){
   document.getElementById('captchaQ').textContent = `${a} + ${b} =`;
   document.getElementById('captchaA').value = '';
 }
-async function sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+
 function showApp(){
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('adminApp').style.display = 'block';
   tryAutoLoad();
 }
+
+function showLogin(message){
+  sessionToken = null;
+  sessionStorage.removeItem('umika_admin_token');
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  if(message){
+    const err = document.getElementById('loginErr');
+    err.textContent = message;
+    err.classList.add('show');
+  }
+  newCaptcha();
+}
+
 async function attemptLogin(){
-  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pw = document.getElementById('loginPw').value;
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPw').value;
   const captchaGuess = parseInt(document.getElementById('captchaA').value, 10);
   const err = document.getElementById('loginErr');
-  if(captchaGuess !== captchaAnswer){ err.classList.add('show'); newCaptcha(); return; }
-  const hash = await sha256(email + '::' + pw);
-  if(ADMIN_CREDENTIAL_HASH === 'PASTE_YOUR_GENERATED_CODE_HERE'){
-    alert('No login has been set up yet. Open generate-credentials.html first to create one.');
-    return;
-  }
-  if(hash === ADMIN_CREDENTIAL_HASH){
-    err.classList.remove('show');
-    sessionStorage.setItem('umika_admin_auth', '1');
-    showApp();
-  }else{
+
+  if(captchaGuess !== captchaAnswer){
+    err.textContent = "That captcha answer isn't right.";
     err.classList.add('show');
     newCaptcha();
+    return;
+  }
+
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  btn.textContent = 'Logging in…';
+
+  try{
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const body = await res.json();
+    if(!res.ok){
+      err.textContent = body.error || "That email or password isn't right.";
+      err.classList.add('show');
+      newCaptcha();
+      return;
+    }
+    sessionToken = body.token;
+    sessionStorage.setItem('umika_admin_token', sessionToken);
+    err.classList.remove('show');
+    showApp();
+  }catch(e){
+    err.textContent = 'Could not reach the server. Please try again.';
+    err.classList.add('show');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = 'Log In';
   }
 }
+
 document.getElementById('loginBtn').addEventListener('click', attemptLogin);
 document.getElementById('loginPw').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  sessionStorage.removeItem('umika_admin_auth');
-  location.reload();
-});
+document.getElementById('logoutBtn').addEventListener('click', ()=> showLogin());
+
 newCaptcha();
-if(sessionStorage.getItem('umika_admin_auth') === '1'){ showApp(); }
+if(sessionToken){ showApp(); } // optimistic — a save call will re-prompt login if the token has expired
 
 async function tryAutoLoad(){
   try{
@@ -248,12 +260,13 @@ function render(){
     </div>
     <div class="row2">
       ${field('Phone','site.phone',d.site.phone)}
-      ${field('Email','site.email',d.site.email)}
+      ${field('WhatsApp Number (digits only, with country code)','site.whatsappNumber',d.site.whatsappNumber)}
     </div>
     <div class="row2">
-      ${field('Address','site.address',d.site.address)}
+      ${field('Email','site.email',d.site.email)}
       ${field('Hours','site.hours',d.site.hours)}
     </div>
+    ${field('Address','site.address',d.site.address)}
     ${field('Footer copyright line','site.footerNote',d.site.footerNote)}
   </section>
 
@@ -295,7 +308,7 @@ function render(){
       ${field('Registration','about.registration',d.about.registration)}
     </div>
     ${imageField('About photo','about.portraitImage',d.about.portraitImage)}
-    <label style="display:block;margin:18px 0 10px;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);">"Why work with me" points</label>
+    <label class="subhead">"Why work with me" points</label>
     <div id="whyItemsList"></div>
     <button type="button" class="add-btn" data-add="about.whyItems">+ Add a point</button>
   </section>
@@ -319,9 +332,58 @@ function render(){
       ${field('Availability','consultPanel.availability',d.consultPanel.availability)}
       ${field('Format','consultPanel.format',d.consultPanel.format)}
     </div>
-    <label style="display:block;margin:14px 0 10px;font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);">"What to expect" list</label>
+    <label class="subhead">"What to expect" list</label>
     <div id="expectList"></div>
     <button type="button" class="add-btn" data-add="consultPanel.expectList">+ Add a line</button>
+  </section>
+
+  <section class="panel">
+    <h2>Booking Section</h2>
+    ${d.booking ? `
+    ${field('Small label','booking.eyebrow',d.booking.eyebrow)}
+    <div class="row2">
+      ${field('Headline — line 1','booking.headlineLine1',d.booking.headlineLine1)}
+      ${field('Headline — emphasized part','booking.headlineEmphasis',d.booking.headlineEmphasis)}
+    </div>
+    ${field('Subheading text','booking.lede',d.booking.lede,true)}
+    ${field('WhatsApp button text','booking.whatsappButtonText',d.booking.whatsappButtonText)}
+    ${field('Pre-filled WhatsApp message','booking.whatsappMessage',d.booking.whatsappMessage,true)}
+    ${field('"What to Expect" box title','booking.expectTitle',d.booking.expectTitle)}
+    <label class="subhead">"What to Expect" list</label>
+    <div id="bookingExpectList"></div>
+    <button type="button" class="add-btn" data-add="booking.expectItems">+ Add a line</button>
+    <div style="margin-top:20px;">
+      ${field('Form submit button text','booking.formSubmitText',d.booking.formSubmitText)}
+      ${field('Form footnote','booking.formNote',d.booking.formNote)}
+    </div>
+    ` : '<div class="sub">No booking section in this content.json.</div>'}
+  </section>
+
+  <section class="panel">
+    <h2>FAQ Section</h2>
+    ${d.faq ? `
+    ${field('Small label','faq.eyebrow',d.faq.eyebrow)}
+    <div class="row2">
+      ${field('Headline — line 1','faq.headlineLine1',d.faq.headlineLine1)}
+      ${field('Headline — emphasized part','faq.headlineEmphasis',d.faq.headlineEmphasis)}
+    </div>
+    <label class="subhead">Questions</label>
+    <div id="faqItemsList"></div>
+    <button type="button" class="add-btn" data-add="faq.items">+ Add a question</button>
+    ` : '<div class="sub">No FAQ section in this content.json.</div>'}
+  </section>
+
+  <section class="panel">
+    <h2>Footer</h2>
+    ${d.footer ? `
+    ${field('Tagline','footer.tagline',d.footer.tagline,true)}
+    <label class="subhead">Quick links</label>
+    <div id="footerQuickLinksList"></div>
+    <button type="button" class="add-btn" data-add="footer.quickLinks">+ Add a quick link</button>
+    <label class="subhead">Legal links</label>
+    <div id="footerLegalLinksList"></div>
+    <button type="button" class="add-btn" data-add="footer.legalLinks">+ Add a legal link</button>
+    ` : '<div class="sub">No footer section in this content.json.</div>'}
   </section>
 
   <section class="panel">
@@ -336,12 +398,19 @@ function render(){
   renderList('practiceList','practiceAreas', v => `<div class="row2">${field('Title','$PATH.title',v.title)}${field('Description','$PATH.description',v.description)}</div>`);
   renderList('consultStepsList','consultSteps', v => `<div class="row2">${field('Step title','$PATH.title',v.title)}${field('Step description','$PATH.description',v.description)}</div>`);
   renderList('expectList','consultPanel.expectList', v => `${field('Line','$PATH',v)}`);
+  if(d.booking) renderList('bookingExpectList','booking.expectItems', v => `${field('Line','$PATH',v)}`);
+  if(d.faq) renderList('faqItemsList','faq.items', v => `${field('Question','$PATH.question',v.question)}${field('Answer','$PATH.answer',v.answer,true)}`);
+  if(d.footer){
+    renderList('footerQuickLinksList','footer.quickLinks', v => `<div class="row2">${field('Label','$PATH.label',v.label)}${field('Link (e.g. #about)','$PATH.href',v.href)}</div>`);
+    renderList('footerLegalLinksList','footer.legalLinks', v => `<div class="row2">${field('Label','$PATH.label',v.label)}${field('Link','$PATH.href',v.href)}</div>`);
+  }
 
   bindInputs();
 }
 
 function renderList(containerId, path, template){
   const container = document.getElementById(containerId);
+  if(!container) return;
   const arr = getPath(path);
   container.innerHTML = arr.map((item,i)=>{
     const itemPath = `${path}[${i}]`;
@@ -394,6 +463,8 @@ function bindInputs(){
       const arr = getPath(path);
       if(path === 'practiceAreas') arr.push({title:'New concern', description:'Description here.'});
       else if(path === 'consultSteps') arr.push({title:'New step', description:'Description here.'});
+      else if(path === 'faq.items') arr.push({question:'New question', answer:'Answer here.'});
+      else if(path === 'footer.quickLinks' || path === 'footer.legalLinks') arr.push({label:'New link', href:'#'});
       else arr.push('New item');
       render();
     });
@@ -412,50 +483,43 @@ document.getElementById('downloadBtn').addEventListener('click', ()=>{
 
 document.getElementById('resetBtn').addEventListener('click', tryAutoLoad);
 
-async function saveToGithub(){
+async function saveContent(){
   if(!data){ alert('Load content.json first.'); return; }
   const statusEl = document.getElementById('saveStatus');
   const btn = document.getElementById('saveBtn');
-  if(GITHUB_TOKEN === 'PASTE_YOUR_GITHUB_TOKEN_HERE'){
-    statusEl.textContent = 'GitHub isn\'t connected yet — ask your developer to finish setup.';
-    statusEl.style.color = '#A9634F';
-    return;
-  }
+
   btn.disabled = true;
   statusEl.style.color = 'var(--ink-soft)';
   statusEl.textContent = 'Saving…';
+
   try{
-    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
-    const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, {
-      cache: 'no-store',
-      headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' }
+    const res = await fetch('/api/save-content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionToken}`
+      },
+      body: JSON.stringify({ content: data })
     });
-    if(!getRes.ok) throw new Error('Could not reach the repo (check owner/repo/branch/token).');
-    const fileInfo = await getRes.json();
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const putRes = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: 'Update site content via admin editor',
-        content,
-        sha: fileInfo.sha,
-        branch: GITHUB_BRANCH
-      })
-    });
-    if(!putRes.ok){
-      const errBody = await putRes.json().catch(()=>({}));
-      throw new Error(errBody.message || 'GitHub rejected the save.');
+    const body = await res.json();
+
+    if(res.status === 401){
+      statusEl.textContent = '';
+      showLogin('Your session expired — please log in again to save.');
+      return;
     }
+    if(!res.ok) throw new Error(body.error || 'Save failed.');
+
     statusEl.style.color = 'var(--sage)';
     statusEl.textContent = 'Saved! Your site will update shortly.';
   }catch(err){
     statusEl.style.color = '#A9634F';
     statusEl.textContent = 'Save failed: ' + err.message;
+  }finally{
+    btn.disabled = false;
   }
-  btn.disabled = false;
 }
-document.getElementById('saveBtn').addEventListener('click', saveToGithub);
+document.getElementById('saveBtn').addEventListener('click', saveContent);
 </script>
 
   </body>
